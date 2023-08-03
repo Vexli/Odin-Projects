@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      let arrRPS = ["rock","paper","scissors"];
+      let sWin = 0;
+      let sTie = 0;
+      let sLose = 0;
+
+      function getComputerChoice() {
+        let iMin = Math.ceil(0);
+        let iMax = arrRPS.length;
+        let index = Math.floor(Math.random() * (iMax - iMin) + iMin);
+        return arrRPS[index];
+      }
+
+      function playRPS(computerSelection,playerSelection) {
+        let cS = computerSelection.toLowerCase();
+        let pS = playerSelection.toLowerCase();
+        let icS = arrRPS.indexOf(cS);
+        let ipS = arrRPS.indexOf(pS);
+        let result = "";
+        let decider = "";
+
+        if (ipS >= 0) {
+          if (ipS == icS + 1 || ipS == icS - 2) {       //player wins, computer loses
+            decider = "beats";
+            result = "Win";
+            sWin += 1;
+          }
+          else if (ipS == icS - 1 || ipS == icS + 2) {  //player loses, computer wins
+            decider = "loses to";
+            result = "Lose";
+            sLose += 1;
+          }
+
+          else if (icS == ipS) {                        //tie
+            decider = "ties";
+            result = "Tie";
+            sTie += 1;
+          }
+
+          return `You ${result}! ${pS} ${decider} ${cS}`;
+        }
+        else {
+          return `INVALID SELECTION`
+        }
+      }
+
+      function game() {
+        for (let i = 0; i < 5; i++) {
+          let prmptRPS = prompt("Rock, Paper, Scissors?");
+          console.log(playRPS(getComputerChoice(),prmptRPS));
+        }
+        console.log( `You won ${sWin} times, lost ${sLose} times, and tied ${sTie} times. Thanks for playing : )`)
+      }
+
+      console.log(game());
+    </script>
+  </body>
+</html>
