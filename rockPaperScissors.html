@@ -1,10 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <meta charset="utf-8">
-    <title></title>
+    <title>Rock Paper scissors</title>
+    <style>
+      a {
+        text-decoration: none;
+      }
+      .nav-custom {
+        background-color: #83BCFF;
+        color: #FFFFFF;
+        text-decoration: none;
+      }
+      .nav-custom :hover {
+        color: #FFE74C;
+      }
+      .rps-choice {
+        color: #000000;
+      }
+    </style>
   </head>
   <body>
+    <div class="container-fluid p-0 d-flex align-items-center justify-content-center">
+      <div class="col-12 p-0" style="">
+        <nav class="ps-5 pe-5 navbar cst-navbar sticky-top nav-custom">
+          <a class="nav-custom">Rock Paper Scissors</a>
+        </nav>
+        <div class="d-flex flex-wrap ps-5 pe-5 pt-2 justify-content-center" style="">
+          <div class="col-12 p-3">
+            <div class="text-center flex">
+              <h2>Let's Play</h2>
+              <div class="row align-items-center justify-content-center">
+                <div class="col-12 col-md-10 col-lg-6 row pt-5">
+                  <div class="col-4">
+                    <a href="#">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png" alt="">
+                      <br>
+                      <h3 class="rps-choice">Rock</h3>
+                    </a>
+                  </div>
+                  <div class="col-4">
+                    <a href="#">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png" alt="">
+                      <br>
+                      <h3 class="rps-choice">Paper</h3>
+                    </a>
+                  </div>
+                  <div class="col-4">
+                    <a href="#">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png" alt="">
+                      <br>
+                      <h3 class="rps-choice">Scissors</h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-5">
+                <h3>RESPONSe</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script type="text/javascript">
 
       let arrRPS = ["rock","paper","scissors"];
@@ -59,8 +119,6 @@
         }
         console.log( `You won ${sWin} times, lost ${sLose} times, and tied ${sTie} times. Thanks for playing : )`)
       }
-
-      console.log(game());
     </script>
   </body>
 </html>
