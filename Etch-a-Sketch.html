@@ -5,15 +5,23 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <title>Etch-A-Sketch</title>
+    <style>
+      div {
+        background-color: #FFFCF2;
+      }
+    </style>
   </head>
   <body>
-    <div class="container-fluid p-0 d-flex align-items-center justify-content-center">
+    <div class="container-fluid p-0 d-flex align-items-center justify-content-center vh-100">
       <div class="col-12 p-0" style="">
         <div class="d-flex flex-wrap ps-5 pe-5 pt-2 justify-content-center" style="">
           <div class="col-12 p-3">
             <div class="text-center flex">
               <h1>Etch-A-Sketch</h1>
-              <div class="row align-items-center justify-content-center pt-5">
+              <div class="row justify-content-center pt-5">
+                <div id="sketch" class="d-flex flex-wrap p-0 m-0" style="height:404px;width:404px;background-color:#fff;border-style:solid;border-width:2px;">
+
+                </div>
               </div>
             </div>
           </div>
@@ -21,4 +29,22 @@
       </div>
     </div>
   </body>
+  <script type="text/javascript">
+    function addElement(parent,type,classS,css,text) { // Create Element in DOM dynamically
+
+      let ele = document.createElement(type);
+      ele.style.cssText = css;
+      ele.textContent = text;
+      ele.className = classS;
+
+      parent.appendChild(ele);
+    }
+
+    let eSketch = document.getElementById("sketch");
+
+    for (let i = 0; i < 256; i++) {
+        addElement(eSketch,"p","p-0 m-0","height:25px;width:25px;border-style:solid;border-width:1px;border-color:#fcfcfc;"," ");
+    }
+
+  </script>
 </html>
