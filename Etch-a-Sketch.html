@@ -9,7 +9,7 @@
       .cust-container{
           background-color: #FFFCF2;
       }
-      .disableSelection{
+      .sketch{
           -webkit-touch-callout: none;
           -webkit-user-select: none;
           -khtml-user-select: none;
@@ -17,6 +17,9 @@
           -ms-user-select: none;
           user-select: none;
           outline: 0;
+      }
+      .eInk{
+          background-color: #000000;
       }
     </style>
   </head>
@@ -31,6 +34,8 @@
                 <div id="sketch" class="d-flex flex-wrap p-0 m-0" style="height:404px;width:404px;background-color:#fff;border-style:solid;border-width:2px;">
                 </div>
               </div>
+              <button id="btnClear" onclick="sketchClear()">Clear</button>
+              <button id="btnClear" onclick="sketchSize()">Size</button>
             </div>
           </div>
         </div>
@@ -50,15 +55,25 @@
 
     let eSketch = document.getElementById("sketch");
     for (let i = 0; i < 256; i++) {
-        addElement(eSketch,"div","p-0 m-0 disableSelection","height:25px;width:25px;border-style:solid;border-width:1px;border-color:#fcfcfc;"," ");
+        addElement(eSketch,"div","sketch","height:25px;width:25px;border-style:solid;border-width:1px;border-color:#fcfcfc;"," ");
     }
 
     document.addEventListener("mouseover",(e) => { // Identify Target
-      if (e.target.className == "p-0 m-0 disableSelection") {
-        console.log(e.target);
-        e.target.style.backgroundColor = "black";
-        e.target.style.border = "black";
+      if (e.target.classList.contains("sketch")) {
+        e.target.classList.add("eInk");
       }
     })
+
+    function sketchClear() {
+      let sketchClear = document.getElementsByClassName("eInk");
+      console.log(sketchClear);
+      while (sketchClear.length > 0) {
+          sketchClear[0].classList.remove("eInk");
+      }
+    }
+
+    function sketchSize() {
+
+    }
   </script>
 </html>
