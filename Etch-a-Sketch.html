@@ -6,13 +6,22 @@
     <meta charset="utf-8">
     <title>Etch-A-Sketch</title>
     <style>
-      div {
-        background-color: #FFFCF2;
+      .cust-container{
+          background-color: #FFFCF2;
+      }
+      .disableSelection{
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          outline: 0;
       }
     </style>
   </head>
   <body>
-    <div class="container-fluid p-0 d-flex align-items-center justify-content-center vh-100">
+    <div class="container-fluid p-0 d-flex align-items-center justify-content-center vh-100 cust-container">
       <div class="col-12 p-0" style="">
         <div class="d-flex flex-wrap ps-5 pe-5 pt-2 justify-content-center" style="">
           <div class="col-12 p-3">
@@ -20,7 +29,6 @@
               <h1>Etch-A-Sketch</h1>
               <div class="row justify-content-center pt-5">
                 <div id="sketch" class="d-flex flex-wrap p-0 m-0" style="height:404px;width:404px;background-color:#fff;border-style:solid;border-width:2px;">
-
                 </div>
               </div>
             </div>
@@ -41,10 +49,16 @@
     }
 
     let eSketch = document.getElementById("sketch");
-
     for (let i = 0; i < 256; i++) {
-        addElement(eSketch,"p","p-0 m-0","height:25px;width:25px;border-style:solid;border-width:1px;border-color:#fcfcfc;"," ");
+        addElement(eSketch,"div","p-0 m-0 disableSelection","height:25px;width:25px;border-style:solid;border-width:1px;border-color:#fcfcfc;"," ");
     }
 
+    document.addEventListener("mouseover",(e) => { // Identify Target
+      if (e.target.className == "p-0 m-0 disableSelection") {
+        console.log(e.target);
+        e.target.style.backgroundColor = "black";
+        e.target.style.border = "black";
+      }
+    })
   </script>
 </html>
