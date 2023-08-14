@@ -4,7 +4,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <meta charset="utf-8">
-    <title>Rock Paper scissors</title>
+    <title>Rock Paper Scissors</title>
     <style>
       a {
         text-decoration: none;
@@ -35,30 +35,25 @@
               <div class="row align-items-center justify-content-center">
                 <div class="col-12 col-md-10 col-lg-6 row pt-5">
                   <div class="col-4">
-                    <a href="#">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png" alt="">
-                      <br>
-                      <h3 class="rps-choice">Rock</h3>
+                    <img id="rock" src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Logan_Rock_Treen_closeup.jpg" alt="rock" width="200">
                     </a>
                   </div>
                   <div class="col-4">
-                    <a href="#">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png" alt="">
-                      <br>
-                      <h3 class="rps-choice">Paper</h3>
-                    </a>
+                    <img id="paper" src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Stack_of_Copy_Paper.jpg" alt="paper" width="200">
                   </div>
                   <div class="col-4">
-                    <a href="#">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png" alt="">
-                      <br>
-                      <h3 class="rps-choice">Scissors</h3>
-                    </a>
+                    <img id="scissors" src="https://upload.wikimedia.org/wikipedia/commons/7/76/Pair_of_scissors_with_black_handle%2C_2015-06-07.jpg" alt="scissors" width="200">
                   </div>
                 </div>
               </div>
               <div class="pt-5">
-                <h3>RESPONSe</h3>
+                <h3 id="rpsResult"></h3>
+              </div>
+              <div class="pt-5">
+                <h3 id="rpsResponse"></h3>
+              </div>
+              <div class="pt-5">
+                <h3 id="rpsStats"></h3>
               </div>
             </div>
           </div>
@@ -90,18 +85,18 @@
         if (ipS >= 0) {
           if (ipS == icS + 1 || ipS == icS - 2) {       //player wins, computer loses
             decider = "beats";
-            result = "Win";
+            result = "win";
             sWin += 1;
           }
           else if (ipS == icS - 1 || ipS == icS + 2) {  //player loses, computer wins
             decider = "loses to";
-            result = "Lose";
+            result = "lose";
             sLose += 1;
           }
 
           else if (icS == ipS) {                        //tie
             decider = "ties";
-            result = "Tie";
+            result = "tie";
             sTie += 1;
           }
 
@@ -119,6 +114,29 @@
         }
         console.log( `You won ${sWin} times, lost ${sLose} times, and tied ${sTie} times. Thanks for playing : )`)
       }
+
+      function rpsUI(){
+        document.addEventListener("click",(e) => {
+          if (e.target.tagName == "IMG") {
+            let rpsResult = ""
+            let response = playRPS(getComputerChoice(),e.target.id);
+            let responseStats = `Wins: ${sWin} Losses: ${sLose} Ties: ${sTie}`
+
+            if (sWin >= 5 && sWin > sLose) {
+              rpsResult = `You win!`
+            } else if (sLose >= 5 && sLose > sWin) {
+              rpsResult = `The computer wins!`
+            }
+
+            document.getElementById("rpsResult").innerHTML = rpsResult;
+            document.getElementById("rpsResponse").innerHTML = response;
+            document.getElementById("rpsStats").innerHTML = responseStats;
+          }
+        })
+      }
+
+      rpsUI()
+
     </script>
   </body>
 </html>
