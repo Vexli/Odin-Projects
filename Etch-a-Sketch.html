@@ -20,6 +20,7 @@
       }
       .eInk{
           background-color: #000000;
+          border-color: #000000 !important;
       }
     </style>
   </head>
@@ -30,12 +31,32 @@
           <div class="col-12 p-3">
             <div class="text-center flex">
               <h1>Etch-A-Sketch</h1>
-              <div class="row justify-content-center pt-5">
-                <div id="sketch" class="d-flex flex-wrap p-0 m-0" style="height:404px;width:404px;background-color:#fff;border-style:solid;border-width:2px;">
+              <div class="row justify-content-center pt-5 pb-5">
+                <div id="sketch" class="d-flex flex-wrap p-0 m-0" style="height:40vh;width:40vh;background-color:#fff;">
                 </div>
               </div>
               <button id="btnClear" onclick="sketchClear()">Clear</button>
-              <button id="btnClear" onclick="sketchSize()">Size</button>
+              <button id="btnClear" onclick="sketchModal()">Size</button>
+              <div class="modal" id="modalSize">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Grid Size</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="mb-2">
+                          <input id="gridSize" type="text" name="gridSize" value="">
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button id="gridNew"  type="button"  data-bs-dismiss="modal" class="btn btn-primary" onclick="sketchNew(document.getElementById("gridSize").value)">New Grid</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -43,8 +64,9 @@
     </div>
   </body>
   <script type="text/javascript">
-    function addElement(parent,type,classS,css,text) { // Create Element in DOM dynamically
+    let eSketch = document.getElementById("sketch");
 
+    function addElement(parent,type,classS,css,text) { // Create Element in DOM dynamically
       let ele = document.createElement(type);
       ele.style.cssText = css;
       ele.textContent = text;
@@ -53,18 +75,7 @@
       parent.appendChild(ele);
     }
 
-    let eSketch = document.getElementById("sketch");
-    for (let i = 0; i < 256; i++) {
-        addElement(eSketch,"div","sketch","height:25px;width:25px;border-style:solid;border-width:1px;border-color:#fcfcfc;"," ");
-    }
-
-    document.addEventListener("mouseover",(e) => { // Identify Target
-      if (e.target.classList.contains("sketch")) {
-        e.target.classList.add("eInk");
-      }
-    })
-
-    function sketchClear() {
+    function sketchClear() { // Remove all existing grid cells
       let sketchClear = document.getElementsByClassName("eInk");
       console.log(sketchClear);
       while (sketchClear.length > 0) {
@@ -72,8 +83,32 @@
       }
     }
 
-    function sketchSize() {
-
+    function sketchGrid(size) { // Create Grid
+      for (let i = 0; i < (size*size); i++) {
+          addElement(eSketch,"div","sketch",`height:${40/size}vh;width:${40/size}vh;border-style:solid;border-width:1px;border-color:#fcfcfc;`," ");
+      }
     }
+
+    function sketchModal() {
+      let modal = new bootstrap.Modal(document.getElementById("modalSize"));
+        modal.show();
+    }
+
+    function sketchNew(size) {
+      while (eSketch.firstChild) {
+        eSketch.removeChild(eSketch.firstChild);
+      }
+      sketchGrid(size);
+      console.log(document.getElementById("gridSize").value)
+    }
+
+    document.addEventListener("mouseover",(e) => { // Identify which grids to color
+      if (e.target.classList.contains("sketch")) {
+        e.target.classList.add("eInk");
+      }
+    })
+
+    sketchGrid(16);
+
   </script>
 </html>
