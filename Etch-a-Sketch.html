@@ -35,7 +35,7 @@
                 <div id="sketch" class="d-flex flex-wrap p-0 m-0" style="height:40vh;width:40vh;background-color:#fff;">
                 </div>
               </div>
-              <button id="btnClear" onclick="sketchClear()">Clear</button>
+              <button id="btnClear" onclick="sketchCell()">Clear</button>
               <button id="btnClear" onclick="sketchModal()">Size</button>
               <div class="modal" id="modalSize">
                 <div class="modal-dialog modal-dialog-centered">
@@ -52,7 +52,7 @@
                       </form>
                     </div>
                     <div class="modal-footer">
-                      <button id="gridNew"  type="button"  data-bs-dismiss="modal" class="btn btn-primary" onclick="sketchNew(document.getElementById("gridSize").value)">New Grid</button>
+                      <button id="gridNew"  type="button"  data-bs-dismiss="modal" class="btn btn-primary" onclick="sketchNew()">New Grid</button>
                     </div>
                   </div>
                 </div>
@@ -64,6 +64,7 @@
     </div>
   </body>
   <script type="text/javascript">
+
     let eSketch = document.getElementById("sketch");
 
     function addElement(parent,type,classS,css,text) { // Create Element in DOM dynamically
@@ -75,11 +76,10 @@
       parent.appendChild(ele);
     }
 
-    function sketchClear() { // Remove all existing grid cells
-      let sketchClear = document.getElementsByClassName("eInk");
-      console.log(sketchClear);
-      while (sketchClear.length > 0) {
-          sketchClear[0].classList.remove("eInk");
+    function sketchCell() { // Remove all existing grid cells
+      let sketchCell = document.getElementsByClassName("eInk");
+      while (sketchCell.length > 0) {
+          sketchCell[0].classList.remove("eInk");
       }
     }
 
@@ -89,17 +89,17 @@
       }
     }
 
-    function sketchModal() {
+    function sketchModal() { // Show Modal size choice
       let modal = new bootstrap.Modal(document.getElementById("modalSize"));
         modal.show();
     }
 
-    function sketchNew(size) {
+    function sketchNew() { // Generate Grid to custom size
+      let gridSize = document.getElementById("gridSize").value;
       while (eSketch.firstChild) {
         eSketch.removeChild(eSketch.firstChild);
       }
-      sketchGrid(size);
-      console.log(document.getElementById("gridSize").value)
+      sketchGrid(gridSize);
     }
 
     document.addEventListener("mouseover",(e) => { // Identify which grids to color
