@@ -14,19 +14,18 @@
         margin: 0.5vh;
         padding: 0vh;
         text-align: center;
-        width: 10vh;
       }
 
       .calcDisplay {
-        border: solid #ffffff 0.25vh;
-        color: #ffffff;
-        height: 10vh;
-        line-height: 10vh;
-        margin: 0.5vh;
-        padding: 0vh;
-        text-align: center;
         width: 43vh;
+      }
 
+      .calcFunction {
+        width: 21vh;
+      }
+
+      .calcSquare {
+        width:10vh;
       }
 
       .keyClick {
@@ -43,46 +42,52 @@
             <div class="text-center flex">
               <div class="row justify-content-center pt-5 pb-5">
                 <div id="calculator" class="d-flex flex-wrap p-0 m-0  text-center" style="height:66vh;width:44vh;background-color:blue;">
-                  <div id="display" class="calcDisplay">
+                  <div id="display" class="calc calcDisplay">
                     Hello
                   </div>
-                  <div id="7" class="calc">
+                  <div id="clear" class="calc calcFunction">
+                    Clear
+                  </div>
+                  <div id="delete" class="calc calcFunction">
+                    Delete
+                  </div>
+                  <div id="7" class="calc calcSquare">
                     7
                   </div>
-                  <div id="8" class="calc">
+                  <div id="8" class="calc calcSquare">
                     8
                   </div>
-                  <div id="9" class="calc">
+                  <div id="9" class="calc calcSquare">
                     9
                   </div>
-                  <div id="+" class="calc calcMath" value="+">
+                  <div id="+" class="calc calcSquare">
                     +
                   </div>
-                  <div id="4" class="calc">
+                  <div id="4" class="calc calcSquare">
                     4
                   </div>
-                  <div id="5" class="calc">
+                  <div id="5" class="calc calcSquare">
                     5
                   </div>
-                  <div id="6" class="calc">
+                  <div id="6" class="calc calcSquare">
                     6
                   </div>
-                  <div id="-" class="calc calcMath">
+                  <div id="-" class="calc calcSquare">
                     -
                   </div>
-                  <div id="1" class="calc">
+                  <div id="1" class="calc calcSquare">
                     1
                   </div>
-                  <div id="2" class="calc">
+                  <div id="2" class="calc calcSquare">
                     2
                   </div>
-                  <div id="3" class="calc">
+                  <div id="3" class="calc calcSquare">
                     3
                   </div>
-                  <div id="*" class="calc calcMath">
+                  <div id="*" class="calc calcSquare">
                     x
                   </div>
-                  <div id="/" class="calc calcMath">
+                  <div id="/" class="calc calcSquare">
                     %
                   </div>
                 </div>
@@ -96,19 +101,19 @@
   <script type="text/javascript">
 
     document.addEventListener("click",(e) => { // Identify button click
-      if (e.target.classList.contains("calc")) {
+      if (e.target.classList.contains("calcSquare")) {
         console.log(e.target.id);
       }
     })
 
     document.addEventListener("mouseover",(e) => { // Identify hover start
-      if (e.target.classList.contains("calc")) {
+      if (e.target.classList.contains("calcSquare")) {
         e.target.classList.add("keyClick");
       }
     })
 
     document.addEventListener("mouseout",(e) => { // Identify hover end
-      if (e.target.classList.contains("calc")) {
+      if (e.target.classList.contains("calcSquare")) {
           e.target.classList.remove("keyClick")
       }
     })
