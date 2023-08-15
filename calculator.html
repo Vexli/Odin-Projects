@@ -6,14 +6,27 @@
     <meta charset="utf-8">
     <title>Calculator</title>
     <style>
-      .calcFunction {
-        border: solid #000000 2px;
-        height: 50px;
-        line-height: 18px;
-        margin: 5px;
-        padding: 15px;
+      .calc {
+        border: solid #ffffff 0.25vh;
+        color: #ffffff;
+        height: 10vh;
+        line-height: 10vh;
+        margin: 0.5vh;
+        padding: 0vh;
         text-align: center;
-        width: 50px;
+        width: 10vh;
+      }
+
+      .calcDisplay {
+        border: solid #ffffff 0.25vh;
+        color: #ffffff;
+        height: 10vh;
+        line-height: 10vh;
+        margin: 0.5vh;
+        padding: 0vh;
+        text-align: center;
+        width: 43vh;
+
       }
 
       .keyClick {
@@ -29,17 +42,47 @@
           <div class="col-12 p-3">
             <div class="text-center flex">
               <div class="row justify-content-center pt-5 pb-5">
-                <div id="calculator" class="d-flex flex-wrap p-0 m-0  text-center" style="height:80vh;width:80vw;">
-                  <div id="add" class="calcFunction calc" value="+">
+                <div id="calculator" class="d-flex flex-wrap p-0 m-0  text-center" style="height:66vh;width:44vh;background-color:blue;">
+                  <div id="display" class="calcDisplay">
+                    Hello
+                  </div>
+                  <div id="7" class="calc">
+                    7
+                  </div>
+                  <div id="8" class="calc">
+                    8
+                  </div>
+                  <div id="9" class="calc">
+                    9
+                  </div>
+                  <div id="+" class="calc calcMath" value="+">
                     +
                   </div>
-                  <div id="subtract" class="calcFunction calc">
+                  <div id="4" class="calc">
+                    4
+                  </div>
+                  <div id="5" class="calc">
+                    5
+                  </div>
+                  <div id="6" class="calc">
+                    6
+                  </div>
+                  <div id="-" class="calc calcMath">
                     -
                   </div>
-                  <div id="multiply" class="calcFunction calc">
+                  <div id="1" class="calc">
+                    1
+                  </div>
+                  <div id="2" class="calc">
+                    2
+                  </div>
+                  <div id="3" class="calc">
+                    3
+                  </div>
+                  <div id="*" class="calc calcMath">
                     x
                   </div>
-                  <div id="divide" class="calcFunction calc">
+                  <div id="/" class="calc calcMath">
                     %
                   </div>
                 </div>
