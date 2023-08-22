@@ -9,6 +9,7 @@
       .calc {
         border: solid #ffffff 0.25vh;
         color: #ffffff;
+        font-size: 6vh;
         height: 10vh;
         line-height: 10vh;
         margin: 0.5vh;
@@ -17,10 +18,18 @@
       }
 
       .calcDisplay {
+        border: solid #ffffff 0.25vh;
+        color: #ffffff;
+        font-size: 8vh;
+        height: 10vh;
+        line-height: 10vh;
+        margin: 0.5vh;
+        padding: 0vh 2vh;
+        text-align: right;
         width: 43vh;
       }
 
-      .calcFunction {
+      .calcWide {
         width: 21vh;
       }
 
@@ -42,53 +51,59 @@
             <div class="text-center flex">
               <div class="row justify-content-center pt-5 pb-5">
                 <div id="calculator" class="d-flex flex-wrap p-0 m-0  text-center" style="height:66vh;width:44vh;background-color:blue;">
-                  <div id="display" class="calc calcDisplay">
-                    Hello
+                  <div id="display" class="calcDisplay">
+
                   </div>
-                  <div id="clear" class="calc calcFunction">
+                  <div id="clear" class="calc calcWide">
                     Clear
                   </div>
-                  <div id="delete" class="calc calcFunction">
-                    Delete
-                  </div>
-                  <div id="7" class="calc calcSquare">
-                    7
-                  </div>
-                  <div id="8" class="calc calcSquare">
-                    8
-                  </div>
-                  <div id="9" class="calc calcSquare">
-                    9
+                  <div id="delete" class="calc calcSquare">
+                    Del
                   </div>
                   <div id="+" class="calc calcSquare">
                     +
                   </div>
-                  <div id="4" class="calc calcSquare">
-                    4
+                  <div id="7" class="calc calcSquare calcNum">
+                    7
                   </div>
-                  <div id="5" class="calc calcSquare">
-                    5
+                  <div id="8" class="calc calcSquare calcNum">
+                    8
                   </div>
-                  <div id="6" class="calc calcSquare">
-                    6
+                  <div id="9" class="calc calcSquare calcNum">
+                    9
                   </div>
                   <div id="-" class="calc calcSquare">
                     -
                   </div>
-                  <div id="1" class="calc calcSquare">
-                    1
+                  <div id="4" class="calc calcSquare calcNum">
+                    4
                   </div>
-                  <div id="2" class="calc calcSquare">
-                    2
+                  <div id="5" class="calc calcSquare calcNum">
+                    5
                   </div>
-                  <div id="3" class="calc calcSquare">
-                    3
+                  <div id="6" class="calc calcSquare calcNum">
+                    6
                   </div>
                   <div id="*" class="calc calcSquare">
                     x
                   </div>
+                  <div id="1" class="calc calcSquare calcNum">
+                    1
+                  </div>
+                  <div id="2" class="calc calcSquare calcNum">
+                    2
+                  </div>
+                  <div id="3" class="calc calcSquare calcNum">
+                    3
+                  </div>
                   <div id="/" class="calc calcSquare">
                     %
+                  </div>
+                  <div id="0" class="calc calcWide calcNum">
+                    0
+                  </div>
+                  <div id="=" class="calc calcWide">
+                    Enter
                   </div>
                 </div>
               </div>
@@ -100,22 +115,34 @@
   </body>
   <script type="text/javascript">
 
+    function operate(num1,num2,operator) { // Perform operation
+    }
+
     document.addEventListener("click",(e) => { // Identify button click
-      if (e.target.classList.contains("calcSquare")) {
+      if (e.target.classList.contains("calc")) {
         console.log(e.target.id);
       }
     })
 
     document.addEventListener("mouseover",(e) => { // Identify hover start
-      if (e.target.classList.contains("calcSquare")) {
+      if (e.target.classList.contains("calc")) {
         e.target.classList.add("keyClick");
       }
     })
 
     document.addEventListener("mouseout",(e) => { // Identify hover end
-      if (e.target.classList.contains("calcSquare")) {
+      if (e.target.classList.contains("calc")) {
           e.target.classList.remove("keyClick")
       }
     })
+
+    document.addEventListener("click",(e) => { // Write Num to display
+      if (e.target.classList.contains("calcNum")) {
+        let valueDisplay = e.target.id;
+        document.getElementById("display").innerHTML = valueDisplay;
+      }
+    })
+
+    console.log(operate(12,10,"*"))
   </script>
 </html>
