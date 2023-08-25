@@ -182,8 +182,10 @@
         num1 = valueDisplay;
         console.log(num1.substring(0,(num1.length-1)));
         num1 = num1.substring(0,(num1.length-1));
-        document.getElementById("display").innerHTML = num1;
+        valueDisplay = num1;
+        document.getElementById("display").innerHTML = valueDisplay;
       }
+      console.log(num1)
     })
 
   </script>
