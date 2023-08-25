@@ -54,13 +54,13 @@
                   <div id="display" class="calcDisplay">
 
                   </div>
-                  <div id="clear" class="calc calcWide">
+                  <div id="clear" class="calc calcWide calcClr">
                     Clear
                   </div>
-                  <div id="delete" class="calc calcSquare">
+                  <div id="delete" class="calc calcSquare calcDel">
                     Del
                   </div>
-                  <div id="+" class="calc calcSquare">
+                  <div id="+" class="calc calcSquare calcFun">
                     +
                   </div>
                   <div id="7" class="calc calcSquare calcNum">
@@ -72,7 +72,7 @@
                   <div id="9" class="calc calcSquare calcNum">
                     9
                   </div>
-                  <div id="-" class="calc calcSquare">
+                  <div id="-" class="calc calcSquare calcFun">
                     -
                   </div>
                   <div id="4" class="calc calcSquare calcNum">
@@ -84,8 +84,8 @@
                   <div id="6" class="calc calcSquare calcNum">
                     6
                   </div>
-                  <div id="*" class="calc calcSquare">
-                    x
+                  <div id="*" class="calc calcSquare calcFun">
+                    ×
                   </div>
                   <div id="1" class="calc calcSquare calcNum">
                     1
@@ -96,13 +96,13 @@
                   <div id="3" class="calc calcSquare calcNum">
                     3
                   </div>
-                  <div id="/" class="calc calcSquare">
-                    %
+                  <div id="/" class="calc calcSquare calcFun">
+                    ÷
                   </div>
                   <div id="0" class="calc calcWide calcNum">
                     0
                   </div>
-                  <div id="=" class="calc calcWide">
+                  <div id="=" class="calc calcWide calcEnt">
                     Enter
                   </div>
                 </div>
@@ -115,7 +115,23 @@
   </body>
   <script type="text/javascript">
 
-    function operate(num1,num2,operator) { // Perform operation
+    let valueDisplay = ""
+    let num1 = ""
+    let fun1 = ""
+    let num2 = ""
+    let result = ""
+
+    let math = {
+      "+": function(x,y) {return x + y},
+      "-": function(x,y) {return x - y},
+      "*": function(x,y) {return x * y},
+      "/": function(x,y) {return x / y}
+    }
+
+    function operate(numA,numB,operator) { // Perform operation
+      num1 = Number(numA);
+      num2 = Number(numB);
+      return math[operator](num1,num2);
     }
 
     document.addEventListener("click",(e) => { // Identify button click
@@ -136,13 +152,39 @@
       }
     })
 
-    document.addEventListener("click",(e) => { // Write Num to display
-      if (e.target.classList.contains("calcNum")) {
-        let valueDisplay = e.target.id;
+    document.addEventListener("click",(e) => { // Write to Display
+      if (e.target.classList.contains("calcNum")) { // Display Numbers
+        valueDisplay = "" + valueDisplay + e.target.id;
         document.getElementById("display").innerHTML = valueDisplay;
+      }
+      else if (e.target.classList.contains("calcFun") && fun1 == "") { // Display functions
+        if (num1 == "") {num1 = valueDisplay;}
+        valueDisplay = "";
+        fun1 = e.target.id;
+        document.getElementById("display").innerHTML = fun1;
+      }
+      else if ((e.target.classList.contains("calcFun") && fun1 != "") || (e.target.classList.contains("calcEnt"))) { // Trigger operation
+        num2 = valueDisplay;
+        result = operate(num1,num2,fun1);
+        num1 = result;
+        num2 = "";
+        fun1 = "";
+        document.getElementById("display").innerHTML = result;
+      }
+      else if (e.target.classList.contains("calcClr")) { // Clear info
+        num1 = "";
+        num2 = "";
+        fun1 = "";
+        valueDisplay = "";
+        document.getElementById("display").innerHTML = valueDisplay;
+      }
+      else if (e.target.classList.contains("calcDel")) { // Delete last character
+        num1 = valueDisplay;
+        console.log(num1.substring(0,(num1.length-1)));
+        num1 = num1.substring(0,(num1.length-1));
+        document.getElementById("display").innerHTML = num1;
       }
     })
 
-    console.log(operate(12,10,"*"))
   </script>
 </html>
