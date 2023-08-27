@@ -6,6 +6,12 @@
     <meta charset="utf-8">
     <title>Calculator</title>
     <style>
+
+      .calculator {
+        background-color: #461220;
+        height:66vh;
+        width:44vh;
+      }
       .calc {
         border: solid #ffffff 0.25vh;
         color: #ffffff;
@@ -30,17 +36,27 @@
         width: 43vh;
       }
 
-      .calcWide {
-        width: 21vh;
+      .calcExt {
+        background-color: #8D6B94;
+      }
+
+      .calcFun {
+      }
+
+      .calcNum {
+        background-color: #006C67;
       }
 
       .calcSquare {
         width:10vh;
       }
 
+      .calcWide {
+        width: 21vh;
+      }
+
       .keyClick {
-        background-color: #ff0000;
-        color: #ffffff;
+        filter: brightness(80%);
       }
     </style>
   </head>
@@ -51,17 +67,17 @@
           <div class="col-12 p-3">
             <div class="text-center flex">
               <div class="row justify-content-center pt-5 pb-5">
-                <div id="calculator" class="d-flex flex-wrap p-0 m-0  text-center" style="height:66vh;width:44vh;background-color:blue;">
+                <div id="calculator" class="d-flex flex-wrap p-0 m-0 text-center calculator">
                   <div id="display" class="calcDisplay">
 
                   </div>
-                  <div id="clear" class="calc calcWide calcClr">
+                  <div id="clear" class="calc calcWide calcClr calcExt">
                     Clear
                   </div>
-                  <div id="delete" class="calc calcSquare calcDel">
+                  <div id="delete" class="calc calcSquare calcDel calcExt">
                     Del
                   </div>
-                  <div id="+" class="calc calcSquare calcFun">
+                  <div id="+" class="calc calcSquare calcFun calcExt">
                     +
                   </div>
                   <div id="7" class="calc calcSquare calcNum">
@@ -73,7 +89,7 @@
                   <div id="9" class="calc calcSquare calcNum">
                     9
                   </div>
-                  <div id="-" class="calc calcSquare calcFun">
+                  <div id="-" class="calc calcSquare calcFun calcExt">
                     -
                   </div>
                   <div id="4" class="calc calcSquare calcNum">
@@ -85,7 +101,7 @@
                   <div id="6" class="calc calcSquare calcNum">
                     6
                   </div>
-                  <div id="*" class="calc calcSquare calcFun">
+                  <div id="×" class="calc calcSquare calcFun calcExt">
                     ×
                   </div>
                   <div id="1" class="calc calcSquare calcNum">
@@ -97,13 +113,13 @@
                   <div id="3" class="calc calcSquare calcNum">
                     3
                   </div>
-                  <div id="/" class="calc calcSquare calcFun">
+                  <div id="÷" class="calc calcSquare calcFun calcExt">
                     ÷
                   </div>
                   <div id="0" class="calc calcWide calcNum">
                     0
                   </div>
-                  <div id="=" class="calc calcWide calcEnt">
+                  <div id="=" class="calc calcWide calcEnt calcExt">
                     Enter
                   </div>
                 </div>
@@ -126,8 +142,8 @@
     let math = {
       "+": function(x,y) {return x + y},
       "-": function(x,y) {return x - y},
-      "*": function(x,y) {return x * y},
-      "/": function(x,y) {return x / y}
+      "×": function(x,y) {return x * y},
+      "÷": function(x,y) {return x / y}
     }
 
     function operate(numA,numB,operator) { // Perform operation
