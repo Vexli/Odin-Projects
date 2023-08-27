@@ -160,12 +160,12 @@
           valueDisplay = numTemp;
       }
       else if (e.target.classList.contains("calcFun") && fun1 == "") { // Display functions
-        num1 = numTemp;
+        if (numTemp != "") {num1 = numTemp;}
         numTemp = "";
         fun1 = e.target.id;
         valueDisplay = fun1;
       }
-      else if ((e.target.classList.contains("calcFun") && fun1 != "") || (e.target.classList.contains("calcEnt"))) { // Trigger operation
+      else if ((e.target.classList.contains("calcFun") && fun1 != "") || (e.target.classList.contains("calcEnt") && num2 == "")) { // Trigger operation
         num2 = numTemp;
         numTemp = "";
         result = operate(num1,num2,fun1);
@@ -187,6 +187,7 @@
         valueDisplay = numTemp;
       }
       document.getElementById("display").innerHTML = valueDisplay;
+      console.log(num1,fun1,num2,numTemp);
     })
 
   </script>
