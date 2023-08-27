@@ -24,6 +24,7 @@
         height: 10vh;
         line-height: 10vh;
         margin: 0.5vh;
+        overflow: none;
         padding: 0vh 2vh;
         text-align: right;
         width: 43vh;
@@ -115,11 +116,12 @@
   </body>
   <script type="text/javascript">
 
-    let valueDisplay = ""
-    let num1 = ""
-    let fun1 = ""
-    let num2 = ""
-    let result = ""
+    let valueDisplay = "";
+    let numTemp = "";
+    let num1 = "";
+    let fun1 = "";
+    let num2 = "";
+    let result = "";
 
     let math = {
       "+": function(x,y) {return x + y},
@@ -154,38 +156,37 @@
 
     document.addEventListener("click",(e) => { // Write to Display
       if (e.target.classList.contains("calcNum")) { // Display Numbers
-        valueDisplay = "" + valueDisplay + e.target.id;
-        document.getElementById("display").innerHTML = valueDisplay;
+          numTemp = "" + numTemp + e.target.id;
+          valueDisplay = numTemp;
       }
       else if (e.target.classList.contains("calcFun") && fun1 == "") { // Display functions
-        if (num1 == "") {num1 = valueDisplay;}
-        valueDisplay = "";
+        num1 = numTemp;
+        numTemp = "";
         fun1 = e.target.id;
-        document.getElementById("display").innerHTML = fun1;
+        valueDisplay = fun1;
       }
       else if ((e.target.classList.contains("calcFun") && fun1 != "") || (e.target.classList.contains("calcEnt"))) { // Trigger operation
-        num2 = valueDisplay;
+        num2 = numTemp;
+        numTemp = "";
         result = operate(num1,num2,fun1);
         num1 = result;
+        if (e.target.classList.contains("calcFun")) {fun1 = e.target.id;}
+        else {fun1 = "";}
         num2 = "";
-        fun1 = "";
-        document.getElementById("display").innerHTML = result;
+        valueDisplay = result;
       }
       else if (e.target.classList.contains("calcClr")) { // Clear info
+        numTemp = "";
         num1 = "";
         num2 = "";
         fun1 = "";
         valueDisplay = "";
-        document.getElementById("display").innerHTML = valueDisplay;
       }
-      else if (e.target.classList.contains("calcDel")) { // Delete last character
-        num1 = valueDisplay;
-        console.log(num1.substring(0,(num1.length-1)));
-        num1 = num1.substring(0,(num1.length-1));
-        valueDisplay = num1;
-        document.getElementById("display").innerHTML = valueDisplay;
+      else if (e.target.classList.contains("calcDel")) { // Delete last number
+        numTemp = numTemp.substring(0,(numTemp.length-1));
+        valueDisplay = numTemp;
       }
-      console.log(num1)
+      document.getElementById("display").innerHTML = valueDisplay;
     })
 
   </script>
