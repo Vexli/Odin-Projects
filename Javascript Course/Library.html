@@ -14,6 +14,44 @@
         white: #F4EDED;
       }
 
+      .bookCard {
+        background-color: #464D77;
+        color: #F9DB6D;
+        margin: 1vw;
+        padding: 1vw;
+        width: 25vw;
+      }
+
+      .bookCardRead {
+        background: #464D77;
+        border: solid 2px #F9DB6D;
+        color: #F9DB6D;
+      }
+
+      .bookCardUnread {
+        background: #F9DB6D;
+        border: solid 2px #F9DB6D;
+        color: #464D77;
+      }
+
+      .bookFormButton {
+        background: #F9DB6D;
+        border: solid 2px #36827F;
+        color: #36827F;
+      }
+
+      .bookFormHide {
+        display: none;
+      }
+
+      .bookFormShow {
+        display: block;
+      }
+
+      .bookLibrary {
+        width: 100%
+      }
+
       .cstm-btn {
         background-color: #36827F;
         border: solid 2px #F9DB6D;
@@ -23,6 +61,9 @@
       .cstm-btn:hover {
         background-color: #F9DB6D;
         color: #36827F;
+      }
+
+      .cstm-container {
       }
 
       .cstm-nav {
@@ -40,15 +81,139 @@
   <body>
     <nav class="ps-5 pe-5 navbar cst-navbar sticky-top cstm-nav">
       <a class="cstm-nav">Library</a>
-      <button type="button" name="bookAdd" class="cstm-btn">Add Book</button>
+      <button id="bookFormButton" type="button" name="bookAdd" class="cstm-btn" onclick="bookAddForm()">Add Book</button>
     </nav>
-    <div class="d-flex flex-wrap ps-5 pe-5 pt-2 justify-content-center">
+    <div class="d-flex flex-wrap ps-5 pe-5 pt-2 justify-content-center cstm-container">
       <div class="col-12 p-3">
         <div class="text-center flex">
+          <div id="divBookForm" class="bookFormHide">
+            <form>
+              <div class="mb-2">
+                <label for="bookTitle">Book Title</label>
+                <br>
+                <input id="bookTitle" type="text" name="bookTitle" value="" required>
+              </div>
+              <div class="mb-2">
+                <label for="bookAuthor">Author</label>
+                <br>
+                <input id="bookAuthor" type="text" name="bookAuthor" value="" required>
+              </div>
+              <div class="mb-2">
+                <label for="bookPage">Pages</label>
+                <br>
+                <input id="bookPage" type="number" name="bookPage" attern="[0-9]" value="" required>
+              </div>
+              <div class="mb-2">
+                <label for="bookRead">Read?</label>
+                <br>
+                <input id="bookRead" type="checkbox" name="bookRead" value="">
+              </div>
+              <div class="">
+                <input type="submit" onclick="addBookToLibrary()" class="cstm-btn" value="Add Book"/>
+              </div>
+            </form>
+          </div>
+          <div id="bookLibrary" class="bookLibrary d-flex justify-content-center flex-wrap">
+          </div>
         </div>
       </div>
     </div>
   </body>
   <script type="text/javascript">
+    let myLibrary = [];
+    let bookForm = document.getElementById("divBookForm");
+    let bookFormButton = document.getElementById("bookFormButton");
+    let bookLibrary = document.getElementById("bookLibrary");
+
+    function Book(name,author,pages,read) { // Create Book Object
+      this.title = name;
+      this.author = author;
+      this.page = pages;
+      this.read = read;
+      this.info = function() {
+        return `${name} by ${author}, ${pages} pages, ${read}`
+      };
+    }
+
+    function addBookToLibrary() { // Add book to the myLibrary array
+      event.preventDefault();
+      let bookAuthor = document.getElementById("bookAuthor").value;
+      let bookTitle = document.getElementById("bookTitle").value;
+      let bookPage = document.getElementById("bookPage").value;
+      let bookRead = document.getElementById("bookRead").checked;
+      let book = new Book(bookTitle, bookAuthor, bookPage, bookRead);
+
+      myLibrary.push(book);
+      console.log(myLibrary);
+
+      bookDisplay();
+    }
+
+    function bookAddForm() { // Trigger bookAddForm
+      if (bookForm.classList.contains("bookFormHide")) {
+        bookForm.classList.remove("bookFormHide");
+        bookForm.classList.add("bookFormShow");
+        bookFormButton.innerHTML = "Cancel";
+      }
+      else if (bookForm.classList.contains("bookFormShow")) {
+        bookForm.classList.remove("bookFormShow");
+        bookForm.classList.add("bookFormHide");
+        bookFormButton.innerHTML = "Add Book";
+      }
+      else { // Error
+        console.log("bookAddForm() > divBookForm > No Class Found")
+      }
+    }
+
+    function bookCard(bookTitle, bookAuthor, bookPage, bookRead) { // Creation of the book display cards
+      console.log(bookTitle, bookAuthor, bookPage, bookRead);
+
+      let bookCardDiv = document.createElement('div');            // Create necessary structure
+      let bookCardTitle = document.createElement('h2');
+      let bookCardAuthor = document.createElement('p');
+      let bookCardPage = document.createElement('p');
+      let bookCardRead = document.createElement('button');
+
+      bookCardTitle.textContent = bookTitle;                      // Assign content to respective blocks
+      bookCardAuthor.textContent = `By ${bookAuthor}`;
+      bookCardPage.textContent = `${bookPage} Pages`;
+      if (bookRead == true){
+        bookCardRead.textContent = 'Read';
+        bookCardRead.classList.add("bookCardRead");
+      } else if (bookRead == false){
+        bookCardRead.textContent = 'Unread';
+        bookCardRead.classList.add("bookCardUnread");
+      }
+      bookCardRead.setAttribute("onclick","bookRead(event)");
+
+      bookCardDiv.appendChild(bookCardTitle);                     // Attach blocks to card
+      bookCardDiv.appendChild(bookCardAuthor);
+      bookCardDiv.appendChild(bookCardPage);
+      bookCardDiv.appendChild(bookCardRead);
+
+      bookLibrary.appendChild(bookCardDiv);
+      bookCardDiv.classList.add("bookCard");
+    }
+
+    function bookDisplay() { // Display all books in Library
+      while (bookLibrary.hasChildNodes()) {
+        bookLibrary.removeChild(bookLibrary.lastChild);
+      }
+      for (let i = 0; i < myLibrary.length; i++) {
+        bookCard(myLibrary[i].title,myLibrary[i].author,myLibrary[i].page,myLibrary[i].read);
+      }
+    }
+
+    function bookRead(e) {
+      if (e.target.classList.contains("bookCardRead")) {
+        e.target.classList.remove("bookCardRead");
+        e.target.classList.add("bookCardUnread");
+        e.target.innerHTML = "Unread";
+      } else if(e.target.classList.contains("bookCardUnread")) {
+        e.target.classList.remove("bookCardUnread");
+        e.target.classList.add("bookCardRead");
+        e.target.innerHTML = "Read";
+      }
+    }
   </script>
 </html>
