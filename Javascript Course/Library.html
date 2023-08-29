@@ -22,6 +22,13 @@
         width: 25vw;
       }
 
+      .bookCardDelete {
+        background: #464D77;
+        border: solid 2px #F9DB6D;
+        color: #F9DB6D;
+        margin: 1vw;
+      }
+
       .bookCardRead {
         background: #464D77;
         border: solid 2px #F9DB6D;
@@ -137,6 +144,7 @@
 
     function addBookToLibrary() { // Add book to the myLibrary array
       event.preventDefault();
+
       let bookAuthor = document.getElementById("bookAuthor").value;
       let bookTitle = document.getElementById("bookTitle").value;
       let bookPage = document.getElementById("bookPage").value;
@@ -144,7 +152,6 @@
       let book = new Book(bookTitle, bookAuthor, bookPage, bookRead);
 
       myLibrary.push(book);
-      console.log(myLibrary);
 
       bookDisplay();
     }
@@ -165,14 +172,15 @@
       }
     }
 
-    function bookCard(bookTitle, bookAuthor, bookPage, bookRead) { // Creation of the book display cards
-      console.log(bookTitle, bookAuthor, bookPage, bookRead);
-
+    function bookCard(bookTitle, bookAuthor, bookPage, bookRead, bookNum) { // Creation of the book display cards
       let bookCardDiv = document.createElement('div');            // Create necessary structure
       let bookCardTitle = document.createElement('h2');
       let bookCardAuthor = document.createElement('p');
       let bookCardPage = document.createElement('p');
       let bookCardRead = document.createElement('button');
+      let bookCardBr = document.createElement('br');
+      let bookCardDelete = document.createElement('button');
+      let bookCardNum = bookNum;
 
       bookCardTitle.textContent = bookTitle;                      // Assign content to respective blocks
       bookCardAuthor.textContent = `By ${bookAuthor}`;
@@ -185,14 +193,26 @@
         bookCardRead.classList.add("bookCardUnread");
       }
       bookCardRead.setAttribute("onclick","bookRead(event)");
+      bookCardDelete.textContent = "Delete";
+      bookCardDelete.setAttribute("onclick","bookDelete(event)");
+      bookCardDelete.classList.add("bookCardDelete");
+
 
       bookCardDiv.appendChild(bookCardTitle);                     // Attach blocks to card
       bookCardDiv.appendChild(bookCardAuthor);
       bookCardDiv.appendChild(bookCardPage);
       bookCardDiv.appendChild(bookCardRead);
+      bookCardDiv.appendChild(bookCardBr);
+      bookCardDiv.appendChild(bookCardDelete);
+      bookCardDiv.classList.add("bookCard");
+      bookCardDiv.setAttribute("id",bookCardNum);
 
       bookLibrary.appendChild(bookCardDiv);
-      bookCardDiv.classList.add("bookCard");
+    }
+
+    function bookDelete(e) {
+      myLibraryDeleted = myLibrary.splice(e.target.parentNode.id,1);
+      bookDisplay();
     }
 
     function bookDisplay() { // Display all books in Library
@@ -200,7 +220,7 @@
         bookLibrary.removeChild(bookLibrary.lastChild);
       }
       for (let i = 0; i < myLibrary.length; i++) {
-        bookCard(myLibrary[i].title,myLibrary[i].author,myLibrary[i].page,myLibrary[i].read);
+        bookCard(myLibrary[i].title,myLibrary[i].author,myLibrary[i].page,myLibrary[i].read,i);
       }
     }
 
@@ -209,10 +229,12 @@
         e.target.classList.remove("bookCardRead");
         e.target.classList.add("bookCardUnread");
         e.target.innerHTML = "Unread";
+        myLibrary[e.target.parentNode.id].read = false;
       } else if(e.target.classList.contains("bookCardUnread")) {
         e.target.classList.remove("bookCardUnread");
         e.target.classList.add("bookCardRead");
         e.target.innerHTML = "Read";
+        myLibrary[e.target.parentNode.id].read = true;
       }
     }
   </script>
