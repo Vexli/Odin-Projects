@@ -6,45 +6,45 @@
     <meta charset="utf-8">
     <title>Library</title>
     <style>
-      .temp {
-        green: #36827F;
-        blue: #464D77;
-        yellow: #F9DB6D;
-        brown: #877666;
-        white: #F4EDED;
+      :root {
+        --colorGreen: #36827F;
+        --colorBlue: #464D77;
+        --colorYellow: #F9DB6D;
+        --colorBrown: #877666;
+        --colorWhite: #F4EDED;
       }
 
       .bookCard {
-        background-color: #464D77;
-        color: #F9DB6D;
+        background-color: var(--colorBlue);
+        color: var(--colorYellow);
         margin: 1vw;
         padding: 1vw;
         width: 25vw;
       }
 
       .bookCardDelete {
-        background: #464D77;
-        border: solid 2px #F9DB6D;
-        color: #F9DB6D;
+        background: var(--colorBlue);
+        border: solid 2px var(--colorYellow);
+        color: var(--colorYellow);
         margin: 1vw;
       }
 
       .bookCardRead {
-        background: #464D77;
-        border: solid 2px #F9DB6D;
-        color: #F9DB6D;
+        background: var(--colorBlue);
+        border: solid 2px var(--colorYellow);
+        color: var(--colorYellow);
       }
 
       .bookCardUnread {
-        background: #F9DB6D;
-        border: solid 2px #F9DB6D;
+        background: var(--colorYellow);
+        border: solid 2px var(--colorYellow);
         color: #464D77;
       }
 
       .bookFormButton {
-        background: #F9DB6D;
-        border: solid 2px #36827F;
-        color: #36827F;
+        background: var(--colorYellow);
+        border: solid 2px var(--colorGreen);
+        color: var(--colorGreen);
       }
 
       .bookFormHide {
@@ -60,27 +60,30 @@
       }
 
       .cstm-btn {
-        background-color: #36827F;
-        border: solid 2px #F9DB6D;
-        color: #F9DB6D;
+        background-color: var(--colorGreen);
+        border: solid 2px var(--colorYellow);
+        color: var(--colorYellow);
       }
 
       .cstm-btn:hover {
-        background-color: #F9DB6D;
-        color: #36827F;
+        background-color: var(--colorYellow);
+        color: var(--colorGreen);
       }
 
       .cstm-container {
+        background-color: var(--colorWhite);
+        height: 95vh;
+        padding: 1vw;
       }
 
       .cstm-nav {
-        background-color: #36827F;
-        color: #F9DB6D;
+        background-color: var(--colorGreen);
+        color: var(--colorYellow);
         text-decoration: none;
       }
 
       .cstm-nav:hover {
-        color: #F4EDED;
+        color: var(--colorWhite);
       }
 
     </style>
@@ -90,7 +93,7 @@
       <a class="cstm-nav">Library</a>
       <button id="bookFormButton" type="button" name="bookAdd" class="cstm-btn" onclick="bookAddForm()">Add Book</button>
     </nav>
-    <div class="d-flex flex-wrap ps-5 pe-5 pt-2 justify-content-center cstm-container">
+    <div class="d-flex flex-wrap justify-content-center cstm-container">
       <div class="col-12 p-3">
         <div class="text-center flex">
           <div id="divBookForm" class="bookFormHide">
