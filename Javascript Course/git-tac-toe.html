@@ -29,7 +29,6 @@
       }
 
       .gameSquare{
-        background-color: var(--colorTest);
         border-style: solid;
         border-width: 1px;
         border-color: var(--colorWhite);
@@ -47,6 +46,7 @@
     </div>
   </body>
   <script type="text/javascript">
+  let arrBoard = [];
 
     function addElement(parent,type,classS,css,text,id) { // Create Element in DOM dynamically
       let ele = document.createElement(type);
@@ -62,8 +62,20 @@
       let gameBoard = document.getElementById("gameBoard");
       for (let i = 0; i < (size*size); i++) {
           addElement(gameBoard,"div","gameSquare",`height:${40/size}vh;width:${40/size}vh;line-height:${40/size}vh;`,"test",i);
+          arrBoard.push("");
       }
     }
+
+    function gameWin { //create game logic
+
+    }
+
+    document.addEventListener("mouseup",(e) => {    // Action on mouse over element
+      if (e.target.classList.contains("gameSquare") && arrBoard[e.target.id] == "") {
+        e.target.innerHTML = "x"; // swap to dynamic assign
+        arrBoard[e.target.id] = "x"; // swap to dynamic assign
+      }
+    })
 
     sketchGrid(3);
   </script>
