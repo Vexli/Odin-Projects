@@ -7,26 +7,64 @@
     <title>Git-Tac-Toe</title>
     <style>
       :root {
+        --colorBackground: #FFFCF2;
+        --colorWhite: #FFFFFF;
+        --colorTest: #FF0000
       }
 
       .cstm-container{
+        background-color: var(--colorBackground);
+        height: 100vh;
+        margin: 0px;
+        padding: 0px;
+        width: 100vw;
+      }
+
+      .gameBoard{
+        background-color: var(--colorWhite);
+        height: 40vh;
+        margin: 0px;
+        padding: 0px;
+        width: 40vh;
+      }
+
+      .gameSquare{
+        background-color: var(--colorTest);
+        border-style: solid;
+        border-width: 1px;
+        border-color: var(--colorWhite);
+        text-align: center;
       }
     </style>
   </head>
   <body>
-    <div class="container-fluid p-0 d-flex align-items-center justify-content-center vh-100 cust-container">
-      <div class="col-12 p-0" style="">
-        <div class="d-flex flex-wrap ps-5 pe-5 pt-2 justify-content-center" style="">
-          <div class="col-12 p-3">
-            <div class="text-center flex">
-              <h1>Git-Tac-Toe</h1>
-            </div>
-          </div>
+    <div class="align-items-center col-12 container-fluid d-flex justify-content-center p-0 vh-100">
+      <div class="flex justify-content-center row text-center cstm-container">
+        <h1>Git-Tac-Toe</h1>
+        <div id="gameBoard" class="d-flex flex-wrap gameBoard">
         </div>
       </div>
     </div>
   </body>
   <script type="text/javascript">
 
+    function addElement(parent,type,classS,css,text,id) { // Create Element in DOM dynamically
+      let ele = document.createElement(type);
+      ele.style.cssText = css;
+      ele.textContent = text;
+      ele.className = classS;
+      ele.setAttribute("id",id);
+
+      parent.appendChild(ele);
+    }
+
+    function sketchGrid(size) {                        // Create Grid
+      let gameBoard = document.getElementById("gameBoard");
+      for (let i = 0; i < (size*size); i++) {
+          addElement(gameBoard,"div","gameSquare",`height:${40/size}vh;width:${40/size}vh;line-height:${40/size}vh;`,"test",i);
+      }
+    }
+
+    sketchGrid(3);
   </script>
 </html>
