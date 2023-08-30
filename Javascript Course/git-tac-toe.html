@@ -7,9 +7,22 @@
     <title>Git-Tac-Toe</title>
     <style>
       :root {
-        --colorBackground: #FFFCF2;
-        --colorWhite: #FFFFFF;
-        --colorTest: #FF0000
+        --colorWhiteTrue: #FFF;
+        --colorBlackTrue: #000;
+        --colorGreyDark:#00030D;
+        --colorBeige: #FFFCF2;
+        --colorRed: #FF0000;
+
+        --colorBackground: var(--colorBeige);
+        --colorLight: var(--colorWhiteTrue);
+        --colorDark: var(--colorBlackTrue);
+        --colorTest: var(--colorRed);
+
+        --colorMode: var(--colorWhiteTrue);
+      }
+
+      a,p,h1,div{
+        color: var(--colorDark);
       }
 
       .cstm-container{
@@ -21,7 +34,8 @@
       }
 
       .gameBoard{
-        background-color: var(--colorWhite);
+        background-color: var(--colorLight);
+        border: solid 0px var(--colorDark);
         height: 40vh;
         margin: 0px;
         padding: 0px;
@@ -29,9 +43,6 @@
       }
 
       .gameSquare{
-        border-style: solid;
-        border-width: 1px;
-        border-color: var(--colorWhite);
         text-align: center;
       }
     </style>
@@ -39,15 +50,32 @@
   <body>
     <div class="align-items-center col-12 container-fluid d-flex justify-content-center p-0 vh-100">
       <div class="flex justify-content-center row text-center cstm-container">
-        <h1>Git-Tac-Toe</h1>
+        <h1>
+          <a onclick="modeDark()">
+            Git-Tac-Toe
+          </a>
+        </h1>
         <div id="gameBoard" class="d-flex flex-wrap gameBoard">
         </div>
       </div>
     </div>
   </body>
   <script type="text/javascript">
-  let arrBoard = [];
 
+    /* Constructor Define */
+    const createArray = () => {
+      let arr = [];
+      return arr;
+    }
+
+    const createCount = () => {
+      let count = 0;
+      return count++;
+    }
+
+    //const createPlayer = (farb)
+
+    /* Function Define */
     function addElement(parent,type,classS,css,text,id) { // Create Element in DOM dynamically
       let ele = document.createElement(type);
       ele.style.cssText = css;
@@ -58,25 +86,63 @@
       parent.appendChild(ele);
     }
 
-    function sketchGrid(size) {                        // Create Grid
+    function sketchGrid(size) {                        // Create Grid (Visible + array)
       let gameBoard = document.getElementById("gameBoard");
       for (let i = 0; i < (size*size); i++) {
-          addElement(gameBoard,"div","gameSquare",`height:${40/size}vh;width:${40/size}vh;line-height:${40/size}vh;`,"test",i);
+          addElement(gameBoard,"div","gameSquare",`font-size:${40/size}vh;height:${40/size}vh;width:${40/size}vh;line-height:${40/size}vh;`,"",i);
           arrBoard.push("");
       }
     }
 
-    function gameWin { //create game logic
-
+    function gameWin() { //create game logic
     }
 
-    document.addEventListener("mouseup",(e) => {    // Action on mouse over element
+    function modeDark() {
+      const cssRoot = document.querySelector(':root');
+      const cssRootStyle = getComputedStyle(cssRoot);
+      const cssColorBlackTrue = cssRootStyle.getPropertyValue("--colorBlackTrue")
+      const cssColorWhiteTrue = cssRootStyle.getPropertyValue("--colorWhiteTrue")
+      const cssColorGreyD = cssRootStyle.getPropertyValue("--colorGreyDark")
+      const cssColorBeige = cssRootStyle.getPropertyValue("--colorBeige")
+      const cssColorRed = cssRootStyle.getPropertyValue("--colorRed")
+
+      if(cssRootStyle.getPropertyValue("--colorMode") == cssColorWhiteTrue){
+        console.log("Activate Dark Mode");
+        cssRoot.style.setProperty("--colorBackground",cssColorGreyD);
+        cssRoot.style.setProperty("--colorTest",cssColorRed);
+        cssRoot.style.setProperty("--colorLight",cssColorBlackTrue);
+        cssRoot.style.setProperty("--colorDark",cssColorWhiteTrue);
+        cssRoot.style.setProperty("--colorMode",cssColorBlackTrue);
+      } else if(cssRootStyle.getPropertyValue("--colorMode") == cssColorBlackTrue){
+        console.log("Activate Light Mode");
+        cssRoot.style.setProperty("--colorBackground",cssColorBeige);
+        cssRoot.style.setProperty("--colorTest",cssColorRed);
+        cssRoot.style.setProperty("--colorLight",cssColorWhiteTrue);
+        cssRoot.style.setProperty("--colorDark",cssColorBlackTrue);
+        cssRoot.style.setProperty("--colorMode",cssColorWhiteTrue);
+      }
+    }
+
+    /* Variable Global */
+    let arrBoard = createArray();
+    let cntTurn = createCount();
+
+    /* Function Call */
+    sketchGrid(3);
+
+
+    /* Event Listener */
+    document.addEventListener("mouseup",(e) => {      // Place marker on mouse click release
       if (e.target.classList.contains("gameSquare") && arrBoard[e.target.id] == "") {
-        e.target.innerHTML = "x"; // swap to dynamic assign
-        arrBoard[e.target.id] = "x"; // swap to dynamic assign
+        if (cntTurn % 2 == 0) {
+          e.target.innerHTML = "x";
+          arrBoard[e.target.id] = "x";
+        } else if (cntTurn % 2 == 1) {
+          e.target.innerHTML = "o";
+          arrBoard[e.target.id] = "o";
+        }
+        cntTurn += 1;
       }
     })
-
-    sketchGrid(3);
   </script>
 </html>
