@@ -35,20 +35,30 @@
 
       .gameBoard{
         background-color: var(--colorLight);
-        border: solid 0px var(--colorDark);
         height: 40vh;
         margin: 0px;
         padding: 0px;
         width: 40vh;
       }
 
+      .gamePlayer{
+
+      }
+
       .gameSquare{
+        -webkit-box-shadow:inset 0px 0px 0px 0.5vh var(--colorDark);
+        -moz-box-shadow:inset 0px 0px 0px 0.5vh var(--colorDark);
+        box-shadow:inset 0px 0px 0px 0.5vh var(--colorDark);
         text-align: center;
+      }
+
+      .player{
+        padding: 5vh;
       }
     </style>
   </head>
   <body>
-    <div class="align-items-center col-12 container-fluid d-flex justify-content-center p-0 vh-100">
+    <div class="col-12 container-fluid d-flex justify-content-center p-0 vh-100">
       <div class="flex justify-content-center row text-center cstm-container">
         <h1>
           <a onclick="modeDark()">
@@ -56,6 +66,22 @@
           </a>
         </h1>
         <div id="gameBoard" class="d-flex flex-wrap gameBoard">
+        </div>
+        <div class="d-flex justify-content-center align-items-center col-12 gamePlayer">
+          <div class="player">
+            <h2 id="p1">
+              <a>
+                Player 1
+              </a>
+            </h2>
+          </div>
+          <div class="player">
+            <h2 id="p2">
+              <a>
+                Player 2
+              </a>
+            </h2>
+          </div>
         </div>
       </div>
     </div>
@@ -86,10 +112,10 @@
       parent.appendChild(ele);
     }
 
-    function sketchGrid(size) {                        // Create Grid (Visible + array)
-      let gameBoard = document.getElementById("gameBoard");
+    function sketchGrid(target,size) {                    // Create Grid (Visible + array)
+      let gameBoard = document.getElementById(target);
       for (let i = 0; i < (size*size); i++) {
-          addElement(gameBoard,"div","gameSquare",`font-size:${40/size}vh;height:${40/size}vh;width:${40/size}vh;line-height:${40/size}vh;`,"",i);
+          addElement(gameBoard,"div","gameSquare",`font-size:${40/size}vh;height:${40/size}vh;width:${40/size}vh;line-height:${(40/size)}vh;`,"",i);
           arrBoard.push("");
       }
     }
@@ -128,17 +154,17 @@
     let cntTurn = createCount();
 
     /* Function Call */
-    sketchGrid(3);
+    sketchGrid("gameBoard",3);
 
 
     /* Event Listener */
     document.addEventListener("mouseup",(e) => {      // Place marker on mouse click release
       if (e.target.classList.contains("gameSquare") && arrBoard[e.target.id] == "") {
         if (cntTurn % 2 == 0) {
-          e.target.innerHTML = "x";
+          e.target.innerHTML = "X";
           arrBoard[e.target.id] = "x";
         } else if (cntTurn % 2 == 1) {
-          e.target.innerHTML = "o";
+          e.target.innerHTML = "O";
           arrBoard[e.target.id] = "o";
         }
         cntTurn += 1;
