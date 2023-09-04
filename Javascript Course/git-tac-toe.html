@@ -149,12 +149,47 @@
       }
     }
 
+    function checkWinTicTacToe() {
+      let winner = ""
+      let winnerPiece = ""
+
+      if (arrBoard[0] == arrBoard[1] && arrBoard[1] == arrBoard[2] && arrBoard[0] != "") {
+        winnerPiece = arrBoard[0];
+      } else if (arrBoard[3] == arrBoard[4] && arrBoard[4] == arrBoard[5] && arrBoard[3] != "") {
+        winnerPiece = arrBoard[3];
+      } else if (arrBoard[6] == arrBoard[7] && arrBoard[7] == arrBoard[8] && arrBoard[6] != "") {
+        winnerPiece = arrBoard[6];
+      } else if (arrBoard[0] == arrBoard[3] && arrBoard[3] == arrBoard[6] && arrBoard[0] != "") {
+        winnerPiece = arrBoard[0];
+      } else if (arrBoard[1] == arrBoard[4] && arrBoard[4] == arrBoard[7] && arrBoard[1] != "") {
+        winnerPiece = arrBoard[1];
+      } else if (arrBoard[2] == arrBoard[5] && arrBoard[5] == arrBoard[8] && arrBoard[2] != "") {
+        winnerPiece = arrBoard[2];
+      } else if (arrBoard[0] == arrBoard[4] && arrBoard[4] == arrBoard[8] && arrBoard[0] != "") {
+        winnerPiece = arrBoard[0];
+      } else if (arrBoard[2] == arrBoard[4] && arrBoard[4] == arrBoard[6] && arrBoard[2] != "") {
+        winnerPiece = arrBoard[2];
+      } else if (arrBoard[0] != "" && arrBoard[1] != "" && arrBoard[2] != "" && arrBoard[3] != "" && arrBoard[4] != "" && arrBoard[5] != "" && arrBoard[6] != "" && arrBoard[7] != "" && arrBoard[8] != "") {
+        winner = "Tie"
+      }
+
+      if (winnerPiece == "x") {
+        winner = "Player 1";
+      } else if (winnerPiece == "o") {
+        winner = "Player 2";
+      }
+      if (winner != "") {
+        return winner;
+      }
+    }
+
     /* Variable Global */
     let arrBoard = createArray();
     let cntTurn = createCount();
 
     /* Function Call */
     sketchGrid("gameBoard",3);
+
 
 
     /* Event Listener */
@@ -169,6 +204,7 @@
         }
         cntTurn += 1;
       }
+      let winner = checkWinTicTacToe();
     })
   </script>
 </html>
