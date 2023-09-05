@@ -135,14 +135,16 @@
     let bookFormButton = document.getElementById("bookFormButton");
     let bookLibrary = document.getElementById("bookLibrary");
 
-    function Book(name,author,pages,read) { // Create Book Object
-      this.title = name;
-      this.author = author;
-      this.page = pages;
-      this.read = read;
-      this.info = function() {
-        return `${name} by ${author}, ${pages} pages, ${read}`
-      };
+    class Book {
+      constructor(name,author,pages,read) { // Create Book Class
+        this.title = name;
+        this.author = author;
+        this.page = pages;
+        this.read = read;
+        this.info = function() {
+          return `${name} by ${author}, ${pages} pages, ${read}`
+        };
+      }
     }
 
     function addBookToLibrary() { // Add book to the myLibrary array
